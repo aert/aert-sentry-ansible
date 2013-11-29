@@ -1,0 +1,38 @@
+
+server {
+    #listen   80; ## listen for ipv4; this line is default and implied
+    #listen   [::]:80 default_server ipv6only=on; ## listen for ipv6
+
+    server_name {{ app_servername }};
+    access_log  {{ app_log }}/nginx_access.log;
+    error_log   {{ app_log }}/nginx_error.log error;
+
+    root {{ app_assets }};
+
+    client_max_body_size 10M;
+
+    # Common
+    #include /etc/nginx/sites-available/_include_common.conf;
+
+    ## ###############
+    ## Static Files
+    ## ###############
+
+    location /static/ {
+        access_log  off;
+        alias {{ app_assets }}/;
+        expires 33d;
+    }
+    
+    ## ###############
+    ## APP - Assets
+    ## ###############
+
+    location / {
+        proxy_pass http://127.0.0.1:8061;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+}

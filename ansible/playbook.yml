@@ -1,0 +1,13 @@
+---
+# This is the top-level playbook that defines our entire infrastructure.
+
+- hosts: all
+  gather_facts: False
+  sudo: True
+  vars:
+    #installer_local : 
+  roles:
+    - common
+    - nginx
+    # app_assets
+

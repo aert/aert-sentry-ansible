@@ -1,0 +1,8 @@
+---
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart supervisor
+  shell: supervisorctl reread && supervisorctl update && supervisorctl restart assets
+

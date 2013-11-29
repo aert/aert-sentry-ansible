@@ -1,0 +1,23 @@
+---
+# Install Nginx
+
+- name: nginx-apt
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - nginx
+  tags: nginx
+
+# Directories
+        
+- name: nginx-/etc/nginx/sites-available
+  file: path=/etc/nginx/sites-available state=directory owner=root mode=0755
+
+- name: nginx-/etc/nginx/sites-enabled
+  file: path=/etc/nginx/sites-enabled state=directory owner=root mode=0755
+  notify:
+    - restart nginx
+ 
+# Remove Default Site
+- name: nginx-rm-default
+  file: path=/etc/nginx/sites-enabled/default state=absent
+

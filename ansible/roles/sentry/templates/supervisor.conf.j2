@@ -1,0 +1,7 @@
+[program:assets]
+command={{ app_home }}/start_gunicorn.sh
+user=root
+autostart=true
+autorestart=true
+redirect_stderr=True
+stdout_logfile = {{ app_log }}/gunicorn_supervisor.log 
