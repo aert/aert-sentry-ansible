@@ -6,9 +6,8 @@ INSTALLER_VERSION = "6.3.3"
 INSTALLER_PATH = File.join(File.dirname(__FILE__), "build", "setup_sentry-" + INSTALLER_VERSION)
 
 Vagrant.configure("2") do |config|
-  # Debian Wheezy
-  config.vm.box = "wheezy64"
-  config.vm.box_url = "http://downloads.shadoware.org/wheezy64.box"
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Network
   config.vm.network :private_network, ip: "192.168.111.225"
