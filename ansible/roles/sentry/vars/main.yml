@@ -6,13 +6,11 @@ installer_local : "{{ installer_local }}"
 
 # app
 prefix      : /opt/aert
-app_home    : "{{ prefix }}/assets"
+app_home    : "{{ prefix }}/sentry"
 app_env     : "{{ app_home }}/env"
 app_public  : "{{ app_home }}/public"
 app_assets  : "{{ app_public }}/static"
-app_uploads : "{{ app_home }}/uploads"
 app_log     : "{{ app_home }}/log"
-app_fixtures: "{{ app_home }}/fixtures"
 tmp_path    : "{{ prefix }}/tmp"
 installer_dirname : "{{ installer_local | basename }}"
 installer_tgz : "{{ installer_local | mandatory }}.tgz"
