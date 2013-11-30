@@ -16,3 +16,8 @@ app_fixtures: "{{ app_home }}/fixtures"
 tmp_path    : "{{ prefix }}/tmp"
 installer_dirname : "{{ installer_local | basename }}"
 installer_tgz : "{{ installer_local | mandatory }}.tgz"
+
+# pgsql
+dbname     : sentry
+dbuser     : sentry_user
+dbpassword : demo

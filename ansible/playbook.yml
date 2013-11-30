@@ -9,5 +9,6 @@
   roles:
     - common
     - nginx
-    # app_assets
+    - pgsql
+    - sentry
 
