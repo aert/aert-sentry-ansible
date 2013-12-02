@@ -6,7 +6,7 @@
 
 # Configure supervisor
 - name: supervisor_add_app
-  template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/assets.conf
+  template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/sentry.conf
   notify:
     - restart supervisor
     - restart nginx
