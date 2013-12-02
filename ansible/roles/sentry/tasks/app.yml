@@ -53,8 +53,8 @@
 - name: sentry-postinst-upgrade
   shell: cd {{app_home}} && make upgrade
 
-- name: sentry-postinst-start
-  shell: cd {{app_home}} && make start
+#- name: sentry-postinst-start
+#  shell: cd {{app_home}} && make start
 
 #- name: sentry-conf_gunicorn
 #  template: src=start_gunicorn.sh.j2 dest={{ app_home }}/start_gunicorn.sh mode=0751 owner=www-data group=www-data
