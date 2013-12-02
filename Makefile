@@ -1,4 +1,4 @@
-VERSION=6.4.1
+VERSION=6.3.3
 SETUP_NAME=setup_sentry-$(VERSION)
 SETUP_DIR=build/$(SETUP_NAME)
 

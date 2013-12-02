@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Installer local path <without> extension
-INSTALLER_VERSION = "6.4.1"
+INSTALLER_VERSION = "6.3.3"
 INSTALLER_PATH = File.join(File.dirname(__FILE__), "build", "setup_sentry-" + INSTALLER_VERSION)
 
 Vagrant.configure("2") do |config|
