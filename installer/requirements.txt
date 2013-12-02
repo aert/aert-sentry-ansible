@@ -1,1 +1,1 @@
-sentry[postgres]
+sentry

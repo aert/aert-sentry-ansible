@@ -11,7 +11,7 @@ wheel:
 	@rm -rf build/$(SETUP_NAME)*
 	@mkdir -p $(SETUP_DIR)
 	# Wheel	
-	@pip wheel --wheel-dir=build/wheel/wheel-dir "sentry[postgres]==$(VERSION)" --download-cache $(PIP_CACHE)
+	@pip wheel --wheel-dir=build/wheel/wheel-dir "sentry==$(VERSION)" --download-cache $(PIP_CACHE)
 	@mv build/wheel/wheel-dir $(SETUP_DIR)/wheel-dir
 	@rm -rf build/wheel/
 	# TAR

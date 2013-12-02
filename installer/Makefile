@@ -13,11 +13,12 @@ install_deps:
 
 install_env:
 	mkdir -p $(NEW_VENV_PATH)
-	virtualenv -p python2.7 --no-site-packages $(NEW_VENV_PATH)
+	virtualenv -p python2.7 --system-site-packages $(NEW_VENV_PATH)
 	$(NEW_VENV_PATH)/bin/pip install --upgrade pip
 	$(NEW_VENV_PATH)/bin/pip install -I "setuptools>=0.8" "wheel>=0.22"
 
 install_wheel:
+	#$(NEW_VENV_PATH)/bin/pip install -r psycopg2
 	$(NEW_VENV_PATH)/bin/pip install --use-wheel --no-index --find-links=wheel-dir/ -r requirements.txt
 
 install_links:
