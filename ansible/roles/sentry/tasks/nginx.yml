@@ -1,10 +1,10 @@
 ---
 
 - name: nginx_app_available
-  template: src=site_assets.app.j2 dest=/etc/nginx/sites-available/assets.app owner=www-data group=www-data
+  template: src=sentry.site dest=/etc/nginx/sites-available/sentry.app owner=www-data group=www-data
 
 - name: nginx_app_enable
-  file: src=/etc/nginx/sites-available/assets.app dest=/etc/nginx/sites-enabled/assets.app state=link owner=www-data group=www-data
+  file: src=/etc/nginx/sites-available/sentry.app dest=/etc/nginx/sites-enabled/sentry.app state=link owner=www-data group=www-data
   notify:
     - restart nginx
  

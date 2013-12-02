@@ -2,5 +2,5 @@
  
 - include: postgresql.yml
 - include: app.yml
-#- include: supervisor.yml
+- include: supervisor.yml
 #- include: nginx.yml

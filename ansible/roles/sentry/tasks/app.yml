@@ -46,6 +46,9 @@
 - name: sentry-conf_makefile
   template: src=Makefile dest={{ app_home }}/Makefile owner=www-data group=www-data
 
+- name: sentry-conf_gunicorn_upload
+  template: src=start_sentry.sh dest={{ app_home }}/start_sentry.sh mode=0751 owner=www-data group=www-data
+
 # Post-Inst
 - name: sentry-postinst-data-upload
   template: src=initial_data_admin.json dest={{ app_home }}/initial_data_admin.json owner=www-data group=www-data
@@ -56,9 +59,6 @@
 #- name: sentry-postinst-start
 #  shell: cd {{app_home}} && make start
 
-#- name: sentry-conf_gunicorn
-#  template: src=start_gunicorn.sh.j2 dest={{ app_home }}/start_gunicorn.sh mode=0751 owner=www-data group=www-data
-#
-#- name: sentry-conf_perms
-#  shell: chown -R www-data:www-data {{ app_home }}
+- name: sentry-conf_perms
+  shell: chown -R www-data:www-data {{ app_home }}
 
