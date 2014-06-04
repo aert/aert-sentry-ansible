@@ -9,5 +9,5 @@
   template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/sentry.conf
   notify:
     - restart supervisor
-    - restart nginx
+    - reload nginx
 

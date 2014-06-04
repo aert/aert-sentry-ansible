@@ -6,5 +6,5 @@
 - name: nginx_app_enable
   file: src=/etc/nginx/sites-available/sentry.app dest=/etc/nginx/sites-enabled/sentry.app state=link owner=www-data group=www-data
   notify:
-    - restart nginx
+    - reload nginx
  

@@ -15,7 +15,7 @@
 - name: nginx-/etc/nginx/sites-enabled
   file: path=/etc/nginx/sites-enabled state=directory owner=root mode=0755
   notify:
-    - restart nginx
+    - reload nginx
  
 # Remove Default Site
 - name: nginx-rm-default
