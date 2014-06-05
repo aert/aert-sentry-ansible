@@ -1,64 +1,43 @@
 ---
-
 # Dependencies
 - name: sentry-deps_apt
   apt: pkg={{ item }} state=installed
   with_items:
+    - python-dev
     - python-virtualenv
     - python-pip
-    - supervisor
-
-# Pre-install
-- name: sentry-preinst_stop_supervisor
-  shell: service supervisor stop
+  sudo: yes
 
 - name: sentry-preinst_installer_dirs
-  file: path={{ item }} state=directory owner=www-data group=www-data
-  with_items:
-    - "{{ prefix }}"
-    - "{{ tmp_path }}"
-
-- name: sentry-preinst_installer_upload
-  copy: src={{ item }} dest={{ tmp_path }} owner=www-data group=www-data
-  with_items:
-    - "{{ installer_tgz }}"
-
-- name: sentry-preinst_installer_untar
-  shell: cd {{ tmp_path }} && tar zxf {{ installer_tgz | basename }}
+  file: path={{ prefix }} state=directory owner={{ app_user }} group={{ app_group }}
+  sudo: yes
 
 - name: sentry-install
-  shell: cd {{ tmp_path }}/{{ installer_dirname }} && make install PREFIX={{ prefix }}
-
-- name: sentry-postinst_clean_untar_dir
-  file: path={{ tmp_path }}/{{ installer_dirname }} state=absent
+  pip: name={{ item }} virtualenv={{ app_env }}
+  sudo: no
+  with_items:
+   - psycopg2
+   - sentry
+  sudo_user: "{{ app_user }}"
+  sudo: yes
 
 # Config 
 - name: sentry-conf_app_dirs
-  file: path={{ item }} state=directory owner=www-data group=www-data  recurse=yes
+  file: path={{ item }} state=directory owner={{ app_user }} group={{ app_group }} recurse=yes
   with_items:
-    - "{{ app_env }}"
     - "{{ app_assets }}"
     - "{{ app_log }}"
+  sudo: yes
 
 - name: sentry-conf_config_file
-  template: src=sentry.conf.py dest={{ app_home }}/sentry.conf.py owner=www-data group=www-data
-
-- name: sentry-conf_makefile
-  template: src=Makefile dest={{ app_home }}/Makefile owner=www-data group=www-data
-
-- name: sentry-conf_gunicorn_upload
-  template: src=start_sentry.sh dest={{ app_home }}/start_sentry.sh mode=0751 owner=www-data group=www-data
+  template: src=sentry.conf.py dest={{ app_home }}/sentry.conf.py owner={{ app_user }} group={{ app_group }}
+  sudo: yes
 
 # Post-Inst
-- name: sentry-postinst-data-upload
-  template: src=initial_data_admin.json dest={{ app_home }}/initial_data_admin.json owner=www-data group=www-data
+# - name: sentry-postinst-data-upload
+#   template: src=initial_data_admin.json dest={{ app_home }}/initial_data_admin.json owner=www-data group=www-data
 
 - name: sentry-postinst-upgrade
-  shell: cd {{app_home}} && make upgrade
-
-#- name: sentry-postinst-start
-#  shell: cd {{app_home}} && make start
-
-- name: sentry-conf_perms
-  shell: chown -R www-data:www-data {{ app_home }}
-
+  shell: "{{ app_env }}/bin/sentry --config={{ app_home }}/sentry.conf.py upgrade"
+  sudo_user: "{{ app_user }}"
+  sudo: yes

@@ -1,0 +1,19 @@
+[uwsgi]
+chdir = {{ app_home }}
+env = SENTRY_CONF={{ app_home }}/sentry.conf.py
+module = sentry.wsgi
+
+uid = {{ app_user }}
+gid = {{ app_group }}
+
+logger = file:/var/log/uwsgi/sentry/uwsgi.log
+virtualenv = {{ app_env }}
+
+; spawn the master and 1 processes
+socket = {{ app_home }}/socket
+master = true
+processes = 1
+
+; allow longer headers for raven.js if applicable
+; default: 4096
+buffer-size = 32768

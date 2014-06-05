@@ -1,7 +1,8 @@
 ---
 - name: reload nginx
   service: name=nginx state=reloaded
+  sudo: yes
 
-- name: restart supervisor
-  shell: supervisorctl reread && supervisorctl update && supervisorctl restart assets
-
+- name: uwsgi started
+  service: name=uwsgi state=started
+  sudo: yes

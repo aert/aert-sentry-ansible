@@ -1,0 +1,34 @@
+---
+
+- name: ensure system uwsgi installed
+  pip: name=uwsgi
+  sudo: yes
+
+- name: ensure uwsgi dirs exist
+  file: state=directory path={{ item }}
+  with_items:
+   - /etc/uwsgi
+   - /etc/uwsgi/apps-available
+   - /etc/uwsgi/apps-enabled
+   - /var/log/uwsgi
+   - /var/run/uwsgi
+   - /var/log/uwsgi/sentry
+  sudo: yes
+
+- name: uwsgi log dir writable
+  file: path=/var/log/uwsgi/sentry owner={{ app_user }} group={{ app_group }}
+  sudo: yes
+
+- name: uwsgi file templated
+  template: src=sentry.uwsgi dest=/etc/uwsgi/apps-available/sentry.ini
+  sudo: yes
+
+- name: uwsgi upstart job
+  template: src=uwsgi.upstart dest=/etc/init/uwsgi.conf
+  sudo: yes
+
+- name: uwsgi enable
+  file: src=/etc/uwsgi/apps-available/sentry.ini dest=/etc/uwsgi/apps-enabled/sentry.ini state=link
+  notify:
+    - uwsgi started
+  sudo: yes

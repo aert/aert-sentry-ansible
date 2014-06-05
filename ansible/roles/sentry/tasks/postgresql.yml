@@ -3,11 +3,14 @@
 - name: pgsql-sentry-db
   postgresql_db: name={{dbname}}
   sudo_user: postgres
+  sudo: yes
 
 - name: pgsql-sentry-user
   postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
   sudo_user: postgres
+  sudo: yes
 
 - name: pgsql-sentry-user-roles
   postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
   sudo_user: postgres
+  sudo: yes

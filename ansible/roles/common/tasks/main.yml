@@ -3,8 +3,7 @@
 - name: base_apt
   apt: pkg={{ item }} state=installed update_cache=yes
   with_items:
-    - vim
     - python
-    - make
   tags: common
+  sudo: yes
 

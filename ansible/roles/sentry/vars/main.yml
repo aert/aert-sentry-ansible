@@ -1,19 +1,18 @@
 ---
-
 # external
 app_servername : "{{ app_servername }}"
 installer_local : "{{ installer_local }}"
 
 # app
-prefix      : /opt/aert
+prefix      : /srv
 app_home    : "{{ prefix }}/sentry"
 app_env     : "{{ app_home }}/env"
 app_public  : "{{ app_home }}/public"
 app_assets  : "{{ app_public }}/static"
-app_log     : "{{ app_home }}/log"
+app_log     : "/var/log/nginx/sentry"
 tmp_path    : "{{ prefix }}/tmp"
-installer_dirname : "{{ installer_local | basename }}"
-installer_tgz : "{{ installer_local | mandatory }}.tgz"
+app_user    : www-data
+app_group   : www-data
 
 # pgsql
 dbname     : sentry

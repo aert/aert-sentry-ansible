@@ -2,9 +2,12 @@
 
 - name: nginx_app_available
   template: src=sentry.site dest=/etc/nginx/sites-available/sentry.app owner=www-data group=www-data
+  sudo: yes
+  notify:
+    - reload nginx
 
 - name: nginx_app_enable
   file: src=/etc/nginx/sites-available/sentry.app dest=/etc/nginx/sites-enabled/sentry.app state=link owner=www-data group=www-data
   notify:
     - reload nginx
- 
+  sudo: yes

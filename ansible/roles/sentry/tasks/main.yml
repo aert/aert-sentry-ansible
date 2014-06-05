@@ -1,6 +1,6 @@
 ---
- 
+
 - include: postgresql.yml
 - include: app.yml
-- include: supervisor.yml
+- include: uwsgi.yml
 - include: nginx.yml

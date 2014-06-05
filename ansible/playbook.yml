@@ -3,7 +3,7 @@
 
 - hosts: all
   gather_facts: False
-  sudo: True
+  sudo: no
   vars:
     #installer_local : 
   roles:
