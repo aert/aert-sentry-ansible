@@ -3,7 +3,7 @@ server {
     #listen   80; ## listen for ipv4; this line is default and implied
     #listen   [::]:80 default_server ipv6only=on; ## listen for ipv6
 
-    server_name {{ app_servername }};
+    server_name {{ app_hostname }};
     access_log  {{ app_log }}/nginx_access.log;
     error_log   {{ app_log }}/nginx_error.log error;
 
@@ -30,7 +30,7 @@ server {
 
     location / {
         include uwsgi_params;
-        uwsgi_pass http://unix:{{ app_home }}/socket;
+        uwsgi_pass unix:{{ app_home }}/socket;
     }
 
 }

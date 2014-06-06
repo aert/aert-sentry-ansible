@@ -18,6 +18,10 @@
   with_items:
    - psycopg2
    - sentry
+   - redis
+   - hiredis
+   - nydus
+   - python-memcached
   sudo_user: "{{ app_user }}"
   sudo: yes
 

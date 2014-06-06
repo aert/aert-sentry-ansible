@@ -35,12 +35,12 @@ DATABASES = {
 # You'll need to install the required dependencies for Memcached:
 #   pip install python-memcached
 #
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': ['127.0.0.1:11211'],
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': ['127.0.0.1:11211'],
+    }
+}
 
 ###########
 ## Queue ##
@@ -52,7 +52,7 @@ DATABASES = {
 
 # You can enable queueing of jobs by turning off the always eager setting:
 # CELERY_ALWAYS_EAGER = False
-# BROKER_URL = 'redis://localhost:6379'
+BROKER_URL = 'redis://localhost:6379'
 
 ####################
 ## Update Buffers ##
@@ -66,26 +66,26 @@ DATABASES = {
 # You'll need to install the required dependencies for Redis buffers:
 #   pip install redis hiredis nydus
 #
-# SENTRY_BUFFER = 'sentry.buffer.redis.RedisBuffer'
-# SENTRY_REDIS_OPTIONS = {
-#     'hosts': {
-#         0: {
-#             'host': '127.0.0.1',
-#             'port': 6379,
-#         }
-#     }
-# }
+SENTRY_BUFFER = 'sentry.buffer.redis.RedisBuffer'
+SENTRY_REDIS_OPTIONS = {
+    'hosts': {
+        0: {
+            'host': '127.0.0.1',
+            'port': 6379,
+        }
+    }
+}
 
 ################
 ## Web Server ##
 ################
 
 # You MUST configure the absolute URI root for Sentry:
-SENTRY_URL_PREFIX = 'http://{{app_servername}}'  # No trailing slash!
+SENTRY_URL_PREFIX = 'http://{{app_hostname}}'  # No trailing slash!
 
 # If you're using a reverse proxy, you should enable the X-Forwarded-Proto
 # header, and uncomment the following setting
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SENTRY_WEB_HOST = '0.0.0.0'
 SENTRY_WEB_PORT = 9000
@@ -110,7 +110,7 @@ EMAIL_PORT = 25
 EMAIL_USE_TLS = False
 
 # The email address to send on behalf of
-SERVER_EMAIL = 'sentry@{{app_servername}}'
+SERVER_EMAIL = 'sentry@{{app_hostname}}'
 
 ###########
 ## etc. ##
@@ -119,6 +119,7 @@ SERVER_EMAIL = 'sentry@{{app_servername}}'
 # If this file ever becomes compromised, it's important to regenerate your SECRET_KEY
 # Changing this value will result in all current sessions being invalidated
 SECRET_KEY = 'XBR+olYwcqi4Cldv38ATXwb0ficn8uXDIYNKgKpOxLInd/D4EtV04A=='
+SENTRY_ALLOW_REGISTRATION = False
 
 # http://twitter.com/apps/new
 # It's important that input a callback URL, even if its useless. We have no idea why, consult Twitter.

@@ -1,8 +1,4 @@
 ---
-# external
-app_servername : "{{ app_servername }}"
-installer_local : "{{ installer_local }}"
-
 # app
 prefix      : /srv
 app_home    : "{{ prefix }}/sentry"

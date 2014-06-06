@@ -1,5 +1,4 @@
 ---
-
 - name: pgsql-sentry-db
   postgresql_db: name={{dbname}}
   sudo_user: postgres
